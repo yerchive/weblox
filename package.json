@@ -1,0 +1,16 @@
+{
+  "name": "webblox",
+  "version": "0.1.0",
+  "description": "Host-side launcher for Roblox's official Web (Emscripten) client: engine vendor fetcher, cross-origin-isolated player page, service-worker network bridge (wisp/epoxy), and Scramjet launch integration.",
+  "type": "module",
+  "scripts": {
+    "vendor": "node scripts/fetch-vendor.mjs",
+    "vendor:engine": "node scripts/fetch-vendor.mjs --engine-only",
+    "start": "node server.mjs",
+    "test": "node scripts/test-fsindex.mjs && node scripts/test-server.mjs"
+  },
+  "engines": {
+    "node": ">=18.17"
+  },
+  "license": "MIT"
+}

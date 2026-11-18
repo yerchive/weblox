@@ -1,0 +1,6 @@
+# Fetched at deploy time from setup.rbxcdn.com (Radix ToS + size: ~100 MB wasm, ~2900 content files)
+vendor/
+
+.venv/
+node_modules/
+*.log
