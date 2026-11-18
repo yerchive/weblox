@@ -14,6 +14,7 @@
  */
 
 import {
+  existsSync,
   mkdirSync,
   readFileSync,
   rmSync,
@@ -222,3 +223,10 @@ async function main() {
 }
 
 export { main as vendorMain };
+
+if (process.argv[1] === fileURLToPath(import.meta.url)) {
+  main().catch((err) => {
+    console.error("[vendor] failed:", err.message);
+    process.exitCode = 1;
+  });
+}

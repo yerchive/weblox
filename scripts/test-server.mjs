@@ -1,5 +1,5 @@
 import assert from "node:assert";
-import { mkdirSync, rmSync, writeFileSync } from "node:fs";
+import { existsSync, mkdirSync, rmSync, writeFileSync } from "node:fs";
 import { spawn } from "node:child_process";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -17,10 +17,15 @@ child.stderr.on("data", (chunk) => (output += chunk));
 
 const VENDOR_ENGINE = join(ROOT, "..", "vendor", "engine");
 mkdirSync(VENDOR_ENGINE, { recursive: true });
-writeFileSync(join(VENDOR_ENGINE, "WebClient.wasm"), "dummy");
-writeFileSync(join(VENDOR_ENGINE, "WasmPlayer.js"), "dummy");
+if (!existsSync(join(VENDOR_ENGINE, "WebClient.wasm"))) {
+  writeFileSync(join(VENDOR_ENGINE, "WebClient.wasm"), "dummy");
+}
+if (!existsSync(join(VENDOR_ENGINE, "WasmPlayer.js"))) {
+  writeFileSync(join(VENDOR_ENGINE, "WasmPlayer.js"), "dummy");
+}
 
 const BASE = "http://127.0.0.1:47147";
+const vendorExisted = existsSync(join(ROOT, "..", "vendor", "version.json"));
 async function until(predicate, timeoutMs = 8000) {
   const start = Date.now();
   while (Date.now() - start < timeoutMs) {
@@ -68,5 +73,7 @@ try {
   console.log("server smoke test: OK");
 } finally {
   child.kill("SIGTERM");
-  rmSync(join(ROOT, "..", "vendor"), { recursive: true, force: true });
+  if (!vendorExisted) {
+    rmSync(join(ROOT, "..", "vendor"), { recursive: true, force: true });
+  }
 }
