@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="robots" content="noindex" />
+    <title>WebBlox</title>
+    <link rel="stylesheet" href="/player.css" />
+  </head>
+  <body>
+    <div id="loading-overlay" hidden>
+      <div id="loading-icon-shell">
+        <img id="loading-experience-icon" alt="" draggable="false" />
+      </div>
+      <div class="loading-copy">
+        <h1 id="loading-experience-title">Roblox</h1>
+        <p class="loading-experience-creator-row">
+          <span id="loading-experience-creator" hidden></span>
+          <span id="loading-verified-badge" hidden title="Verified creator">&#10003;</span>
+        </p>
+      </div>
+      <img id="loading-background-image" alt="" draggable="false" />
+      <div class="loading-progress" role="status">
+        <p id="status"></p>
+      </div>
+      <div class="loading-error-panel" hidden>
+        <h2 id="loading-error-title">Error</h2>
+        <p id="loading-error-message"></p>
+        <p id="loading-error-code"></p>
+        <button id="loading-error-leave" type="button">Leave</button>
+        <button id="loading-cancel" type="button">Cancel</button>
+      </div>
+    </div>
+
+    <section id="launcher" hidden>
+      <h1>WebBlox</h1>
+      <p class="launcher-hint">Search Roblox experiences or paste a game link, then press Play.</p>
+      <form id="launcher-form">
+        <input id="launcher-query" type="text" autocomplete="off" spellcheck="false" placeholder="Search games, or paste https://www.roblox.com/games/..." />
+        <button id="launcher-play" type="submit">Play</button>
+      </form>
+      <p id="launcher-error" class="launcher-error" hidden></p>
+      <ul id="launcher-results"></ul>
+      <p id="launcher-session" class="launcher-session"></p>
+    </section>
+
+    <main id="input-container" hidden>
+      <textarea id="input-textarea" rows="1"></textarea>
+      <input id="input-input" type="text" autocomplete="off" />
+    </main>
+
+    <canvas id="canvas" width="0" height="0"></canvas>
+
+    <p hidden>
+      <span id="server"></span>
+      <span id="proxyenabled"></span>
+    </p>
+
+    <script src="/config.js"></script>
+    <script src="/bridge.js"></script>
+    <script src="/launcher.js"></script>
+    <script src="/wasm-loader.js"></script>
+  </body>
+</html>
